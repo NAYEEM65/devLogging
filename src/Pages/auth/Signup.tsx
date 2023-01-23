@@ -2,9 +2,19 @@ import Layout from "../../Layout/Layout";
 import { Button, Form, Input } from "antd";
 import { LockOutlined, UserOutlined } from "@ant-design/icons";
 import { Link } from "react-router-dom";
-const Signup: React.FC = () => {
+import { register } from "../../actions/auth";
+import { connect, useSelector } from "react-redux";
+import PropsTypes from "prop-types";
+const Signup: React.FC = ({ register }: any) => {
+  const { user } = useSelector((state: any) => state.auth);
+  console.log(user);
   const onFinish = (values: any) => {
     console.log("Success:", values);
+    register({
+      name: values.fullName,
+      email: values.email,
+      password: values.password,
+    });
   };
 
   const onFinishFailed = (errorInfo: any) => {
@@ -79,4 +89,8 @@ const Signup: React.FC = () => {
   );
 };
 
-export default Signup;
+Signup.propTypes = {
+  register: PropsTypes.func.isRequired,
+};
+
+export default connect(null, { register })(Signup);
