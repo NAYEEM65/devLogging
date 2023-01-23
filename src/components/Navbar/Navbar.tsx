@@ -1,5 +1,5 @@
 import { Drawer } from "antd";
-
+import { Link } from "react-router-dom";
 import React, { useState } from "react";
 import LeftMenu from "./LeftMenu";
 
@@ -12,11 +12,11 @@ const Navbar = () => {
     setVisible(false);
   };
   return (
-    <nav className="p-5 overflow-auto shadow-sm flex justify-between items-center">
+    <nav className="px-5 py-3 bg-slate-700 overflow-auto  flex justify-between items-center shadow-lg">
       <div className="logo">
-        <a href="www.marca.com" className="text-gray-500">
+        <Link to="/" className="text-slate-100">
           DevLogging
-        </a>
+        </Link>
       </div>
       <div className="flex justify-around items-center gap-4">
         <div className="hidden md:flex justify-center items-center gap-4">
