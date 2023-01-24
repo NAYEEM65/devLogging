@@ -1,5 +1,11 @@
 import { Reducer } from "redux";
-import { REGISTER_FAILED, REGISTER_SUCCESS } from "../actions/types";
+import {
+  AUTH_ERROR,
+  LOGIN_SUCCESS,
+  LOGOUT,
+  REGISTER_FAILED,
+  REGISTER_SUCCESS,
+} from "../actions/types";
 interface initState {
   token: string | null;
   isAuthenticated: boolean;
@@ -31,7 +37,24 @@ const reducer: Reducer = (state = initialState, action: any) => {
         isAuthenticated: false,
         loading: false,
       };
+    case LOGIN_SUCCESS:
+      localStorage.setItem("token", payload.token);
+      return {
+        ...state,
+        ...payload,
+        isAuthenticated: true,
+        loading: false,
+      };
 
+    // case AUTH_ERROR:
+    case LOGOUT:
+      return {
+        ...state,
+        token: null,
+        isAuthenticated: false,
+        loading: false,
+        user: null,
+      };
     default:
       return state;
   }

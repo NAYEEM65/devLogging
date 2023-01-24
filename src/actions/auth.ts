@@ -1,6 +1,30 @@
 import axiosInstance from "../utils/axiosInstace";
-import { REGISTER_FAILED, REGISTER_SUCCESS } from "./types";
+import {
+  AUTH_ERROR,
+  LOGIN_FAILED,
+  LOGIN_SUCCESS,
+  LOGOUT,
+  REGISTER_FAILED,
+  REGISTER_SUCCESS,
+  USER_LOADED,
+} from "./types";
 
+// Load User
+export const loadUser =
+  () => async (dispatch: (arg0: { type: string; payload?: any }) => void) => {
+    try {
+      const res = await axiosInstance.get("/api/get-user");
+
+      dispatch({
+        type: USER_LOADED,
+        payload: res.data,
+      });
+    } catch (err) {
+      dispatch({
+        type: AUTH_ERROR,
+      });
+    }
+  };
 //register User
 
 export const register: {} =
@@ -29,3 +53,30 @@ export const register: {} =
       });
     }
   };
+// Login User
+
+export const login =
+  (email: string, password: string) => async (dispatch: any) => {
+    const body = { email, password };
+
+    try {
+      const res = await axiosInstance.post("/api/login", body);
+
+      dispatch({
+        type: LOGIN_SUCCESS,
+        payload: res.data,
+      });
+
+      dispatch(loadUser());
+    } catch (err: any) {
+      const errors = err.response.data.errors;
+
+      console.log(errors);
+
+      dispatch({
+        type: LOGIN_FAILED,
+      });
+    }
+  };
+
+export const logout = () => ({ type: LOGOUT });
