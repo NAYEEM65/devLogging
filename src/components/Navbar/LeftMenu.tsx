@@ -24,6 +24,11 @@ const LeftMenu: React.FC<Iauth> = ({ auth: { isAuthenticated }, logout }) => {
             Home
           </NavLink>
         </li>
+        <li className=" md:p-0 p-3 w-full text-center rounded">
+          <NavLink to="/dashboard" className={activeLink}>
+            Dashboard
+          </NavLink>
+        </li>
         <li>
           <NavLink to="/about" className={activeLink}>
             About

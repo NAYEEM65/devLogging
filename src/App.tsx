@@ -10,6 +10,8 @@ import setAuthToken from "./utils/setAuthToken";
 import store from "./store";
 import { loadUser } from "./actions/auth";
 import { useAppDispatch } from "./hooks/hooks";
+import Dashboard from "./components/dashboard/Dashboard";
+import PrivateRoute from "./routes/PrivateRoute";
 if (localStorage.token) {
   setAuthToken(localStorage.token);
 }
@@ -26,6 +28,14 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/signin" element={<Signin />} />
         <Route path="/signup" element={<Signup />} />
+        <Route
+          path="/dashboard"
+          element={
+            <PrivateRoute>
+              <Dashboard />
+            </PrivateRoute>
+          }
+        />
       </Routes>
     </Fragment>
   );

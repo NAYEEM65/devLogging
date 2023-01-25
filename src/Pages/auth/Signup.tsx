@@ -21,7 +21,7 @@ const Signup: React.FC = ({ register, isAuthenticated }: any) => {
     message.error("something went wrong", errorInfo);
   };
   if (isAuthenticated) {
-    return <Navigate to="/" />;
+    return <Navigate to="/dashboard" />;
   }
 
   return (

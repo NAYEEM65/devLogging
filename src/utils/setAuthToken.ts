@@ -1,4 +1,3 @@
-import axios from "axios";
 import axiosInstance from "./axiosInstace";
 
 const setAuthToken = (token: string) => {

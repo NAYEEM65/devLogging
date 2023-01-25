@@ -20,7 +20,7 @@ const Signin: React.FC<ISignin> = ({ login, isAuthenticated }) => {
     console.log("Failed:", errorInfo);
   };
   if (isAuthenticated) {
-    return <Navigate to="/" />;
+    return <Navigate to="/dashboard" />;
   }
   return (
     <Layout>
