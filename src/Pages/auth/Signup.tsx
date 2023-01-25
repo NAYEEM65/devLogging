@@ -1,11 +1,11 @@
 import Layout from "../../Layout/Layout";
-import { Button, Form, Input } from "antd";
+import { Button, Form, Input, message } from "antd";
 import { LockOutlined, UserOutlined } from "@ant-design/icons";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import { register } from "../../actions/auth";
 import { connect, useSelector } from "react-redux";
 import PropsTypes from "prop-types";
-const Signup: React.FC = ({ register }: any) => {
+const Signup: React.FC = ({ register, isAuthenticated }: any) => {
   const { user } = useSelector((state: any) => state.auth);
   console.log(user);
   const onFinish = (values: any) => {
@@ -18,8 +18,11 @@ const Signup: React.FC = ({ register }: any) => {
   };
 
   const onFinishFailed = (errorInfo: any) => {
-    console.log("Failed:", errorInfo);
+    message.error("something went wrong", errorInfo);
   };
+  if (isAuthenticated) {
+    return <Navigate to="/" />;
+  }
 
   return (
     <Layout>
@@ -92,5 +95,12 @@ const Signup: React.FC = ({ register }: any) => {
 Signup.propTypes = {
   register: PropsTypes.func.isRequired,
 };
+const mapStateToProps = (state: {
+  auth: {
+    isAuthenticated: boolean;
+  };
+}) => ({
+  isAuthenticated: state.auth.isAuthenticated,
+});
 
-export default connect(null, { register })(Signup);
+export default connect(mapStateToProps, { register })(Signup);

@@ -12,3 +12,31 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+.alert {
+  padding: 0.8rem;
+  margin: 1rem 0;
+  opacity: 0.9;
+  background: #f4f4f4;
+  color: #333;
+}
+.alert-light {
+  background: #f4f4f4;
+  color: #333;
+}
+.alert-dark {
+  background: #343a40;
+  color: #fff;
+}
+.alert-danger {
+  background: #dc3545;
+  color: #fff;
+}
+.alert-success {
+  background: #28a745;
+  color: #fff;
+}
+.alert-white {
+  background: #fff;
+  color: #333;
+  border: #ccc solid 1px;
+}

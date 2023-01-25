@@ -1,7 +1,7 @@
 import Layout from "../../Layout/Layout";
 import { Button, Checkbox, Form, Input } from "antd";
 import { LockOutlined, UserOutlined } from "@ant-design/icons";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import { connect } from "react-redux";
 import { login } from "../../actions/auth";
 interface ISignin {
@@ -9,6 +9,7 @@ interface ISignin {
   isAuthenticated: boolean;
 }
 const Signin: React.FC<ISignin> = ({ login, isAuthenticated }) => {
+  const [form] = Form.useForm();
   const onFinish = (values: any) => {
     console.log("Success:", values);
     const { email, password } = values;
@@ -18,9 +19,9 @@ const Signin: React.FC<ISignin> = ({ login, isAuthenticated }) => {
   const onFinishFailed = (errorInfo: any) => {
     console.log("Failed:", errorInfo);
   };
-  // if (isAuthenticated) {
-  //   return <Navigate to="/dashboard" />;
-  // }
+  if (isAuthenticated) {
+    return <Navigate to="/" />;
+  }
   return (
     <Layout>
       <div className="relative bg-[url('https://images.pexels.com/photos/4974915/pexels-photo-4974915.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1')] bg-no-repeat bg-cover bg-center h-[100vh]">
@@ -32,6 +33,7 @@ const Signin: React.FC<ISignin> = ({ login, isAuthenticated }) => {
 
             <Form
               name="basic"
+              form={form}
               initialValues={{ remember: true }}
               onFinish={onFinish}
               onFinishFailed={onFinishFailed}
@@ -87,7 +89,11 @@ const Signin: React.FC<ISignin> = ({ login, isAuthenticated }) => {
   );
 };
 
-const mapStateToProps = (state: { auth: { isAuthenticated: boolean } }) => ({
+const mapStateToProps = (state: {
+  auth: {
+    isAuthenticated: boolean;
+  };
+}) => ({
   isAuthenticated: state.auth.isAuthenticated,
 });
 

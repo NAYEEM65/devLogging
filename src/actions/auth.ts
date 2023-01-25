@@ -1,4 +1,5 @@
 import axiosInstance from "../utils/axiosInstace";
+import setAuthToken from "../utils/setAuthToken";
 import {
   AUTH_ERROR,
   LOGIN_FAILED,
@@ -10,21 +11,23 @@ import {
 } from "./types";
 
 // Load User
-export const loadUser =
-  () => async (dispatch: (arg0: { type: string; payload?: any }) => void) => {
-    try {
-      const res = await axiosInstance.get("/api/get-user");
+export const loadUser = () => async (dispatch: any) => {
+  if (localStorage.token) {
+    setAuthToken(localStorage.token);
+  }
+  try {
+    const res = await axiosInstance.get("/api/get-user");
 
-      dispatch({
-        type: USER_LOADED,
-        payload: res.data,
-      });
-    } catch (err) {
-      dispatch({
-        type: AUTH_ERROR,
-      });
-    }
-  };
+    dispatch({
+      type: USER_LOADED,
+      payload: res.data,
+    });
+  } catch (err) {
+    dispatch({
+      type: AUTH_ERROR,
+    });
+  }
+};
 //register User
 
 export const register: {} =
@@ -43,6 +46,7 @@ export const register: {} =
         type: REGISTER_SUCCESS,
         payload: res.data,
       });
+      dispatch(loadUser());
     } catch (error: any) {
       const errors = error.response.data.errors;
       if (errors) {
