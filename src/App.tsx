@@ -32,7 +32,7 @@ function App() {
           path="/dashboard"
           element={
             <PrivateRoute>
-              <Dashboard />
+              <Dashboard deleteAccount={undefined} />
             </PrivateRoute>
           }
         />
