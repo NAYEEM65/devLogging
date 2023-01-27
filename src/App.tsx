@@ -2,7 +2,7 @@ import "./App.css";
 
 import "antd/dist/reset.css";
 import { Routes, Route } from "react-router-dom";
-import { Fragment, useEffect } from "react";
+import { FC, Fragment, ReactElement, useEffect } from "react";
 import Home from "./Pages/Home/Home";
 import Signin from "./Pages/auth/Signin";
 import Signup from "./Pages/auth/Signup";
@@ -17,7 +17,7 @@ if (localStorage.token) {
   setAuthToken(localStorage.token);
 }
 
-function App() {
+const App: FC = (): ReactElement => {
   const dispatch = useAppDispatch();
   useEffect(() => {
     store.dispatch<any>(loadUser());
@@ -48,6 +48,6 @@ function App() {
       </Routes>
     </Fragment>
   );
-}
+};
 
 export default App;

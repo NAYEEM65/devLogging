@@ -4,11 +4,12 @@ import { LockOutlined, UserOutlined } from "@ant-design/icons";
 import { Link, Navigate } from "react-router-dom";
 import { connect } from "react-redux";
 import { login } from "../../actions/auth";
+import { FC, ReactElement } from "react";
 interface ISignin {
   login: any;
   isAuthenticated: boolean;
 }
-const Signin: React.FC<ISignin> = ({ login, isAuthenticated }) => {
+const Signin: FC<ISignin> = ({ login, isAuthenticated }): ReactElement => {
   const [form] = Form.useForm();
   const onFinish = (values: any) => {
     console.log("Success:", values);

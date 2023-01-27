@@ -1,9 +1,9 @@
 import { Drawer } from "antd";
 import { Link } from "react-router-dom";
-import React, { useState } from "react";
+import React, { FC, ReactElement, useState } from "react";
 import LeftMenu from "./LeftMenu";
 
-const Navbar = () => {
+const Navbar: FC = (): ReactElement => {
   const [visible, setVisible] = useState(false);
   const showDrawer = () => {
     setVisible(true);

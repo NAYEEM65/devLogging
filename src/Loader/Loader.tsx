@@ -1,8 +1,8 @@
-import React from "react";
+import { FC, ReactElement } from "react";
 
-const Loader = () => {
+const Loader: FC = (): ReactElement => {
   return (
-    <div className="text-center">
+    <div className="text-center py-10">
       <div role="status">
         <svg
           aria-hidden="true"

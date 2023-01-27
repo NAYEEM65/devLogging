@@ -5,7 +5,8 @@ import { Link, Navigate } from "react-router-dom";
 import { register } from "../../actions/auth";
 import { connect, useSelector } from "react-redux";
 import PropsTypes from "prop-types";
-const Signup: React.FC = ({ register, isAuthenticated }: any) => {
+import { FC, ReactElement } from "react";
+const Signup: FC = ({ register, isAuthenticated }: any): ReactElement => {
   const { user } = useSelector((state: any) => state.auth);
   console.log(user);
   const onFinish = (values: any) => {

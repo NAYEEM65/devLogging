@@ -2,12 +2,16 @@ import { Button, message } from "antd";
 import { connect } from "react-redux";
 import { NavLink } from "react-router-dom";
 import { logout } from "../../actions/auth";
+import { FC, ReactElement } from "react";
 
 interface Iauth {
   auth: { isAuthenticated: boolean };
   logout: Function;
 }
-const LeftMenu: React.FC<Iauth> = ({ auth: { isAuthenticated }, logout }) => {
+const LeftMenu: FC<Iauth> = ({
+  auth: { isAuthenticated },
+  logout,
+}): ReactElement => {
   const activeLink = (state: { isActive: boolean }) =>
     state.isActive
       ? "md:text-blue-300 text-blue-500 border-b-2 md:border-blue-300 border-blue-500"

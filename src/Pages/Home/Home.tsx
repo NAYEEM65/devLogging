@@ -1,8 +1,8 @@
-import React, { FC } from "react";
+import React, { FC, ReactElement } from "react";
 import Layout from "../../Layout/Layout";
 import { Link } from "react-router-dom";
 import { Button } from "antd";
-const Home: FC = () => {
+const Home: FC = (): ReactElement => {
   return (
     <Layout>
       <section className="relative bg-[url('https://images.pexels.com/photos/4974912/pexels-photo-4974912.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1')] bg-no-repeat bg-cover bg-center h-[100vh]">

@@ -1,7 +1,7 @@
-import React from "react";
+import React, { FC, ReactElement } from "react";
 import { Link } from "react-router-dom";
 
-const Footer = () => {
+const Footer: FC = (): ReactElement => {
   return (
     <footer className="text-center text-sm border-t border-slate-300 py-4">
       <p>

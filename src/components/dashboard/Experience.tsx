@@ -1,6 +1,6 @@
-import React from "react";
+import React, { FC, ReactElement } from "react";
 
-const Experience = () => {
+const Experience: FC = (): ReactElement => {
   return <div>hello</div>;
 };
 

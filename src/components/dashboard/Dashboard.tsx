@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { FC, ReactElement, useEffect } from "react";
 import Layout from "../../Layout/Layout";
 import { connect } from "react-redux";
 import {
@@ -20,12 +20,13 @@ interface IDashboard {
   profile: { profile: any; loading: Boolean };
 }
 
-const Dashboard = ({
-  getCurrentProfile,
-  deleteAccount,
-  auth: { user },
-  profile: { profile, loading },
-}: IDashboard) => {
+const Dashboard: FC<IDashboard> = (props): ReactElement => {
+  const {
+    getCurrentProfile,
+    deleteAccount,
+    auth: { user },
+    profile: { profile, loading },
+  } = props;
   useEffect(() => {
     getCurrentProfile();
   }, [getCurrentProfile]);

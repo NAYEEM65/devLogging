@@ -1,9 +1,9 @@
-import { connect } from "react-redux";
+// import { connect } from "react-redux";
 import { Form, Input, Button, message, Select } from "antd";
-import { useState } from "react";
+import { FC, ReactElement, useState } from "react";
 import Layout from "../../Layout/Layout";
 
-const CreateProfile = () => {
+const CreateProfile: FC = (): ReactElement => {
   const [form] = Form.useForm();
   const [status, setStatus] = useState<string>("");
 
