@@ -1,82 +1,99 @@
-import React, { FC, useEffect } from "react";
+import { useEffect } from "react";
 import Layout from "../../Layout/Layout";
 import { connect } from "react-redux";
-
+import {
+  FaUserAlt,
+  FaTrash,
+  FaEdit,
+  FaBlackTie,
+  FaGraduationCap,
+} from "react-icons/fa";
 import { getCurrentProfile } from "../../actions/profile";
 import { Link } from "react-router-dom";
+import Loader from "../../Loader/Loader";
+import { Button } from "antd";
 
 interface IDashboard {
   getCurrentProfile: Function;
   deleteAccount: any;
   auth: { user: any };
-  profile: { profile: any };
+  profile: { profile: any; loading: Boolean };
 }
 
 const Dashboard = ({
   getCurrentProfile,
   deleteAccount,
   auth: { user },
-  profile: { profile },
+  profile: { profile, loading },
 }: IDashboard) => {
   useEffect(() => {
     getCurrentProfile();
   }, [getCurrentProfile]);
   return (
     <Layout>
-      <section className="max-w-[1100px] m-auto overflow-hidden px-8 mt-24 mb-12">
-        <h1 className="text-4xl mb-4">Dashboard</h1>
-        <p className="text-3xl mb-4">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            strokeWidth="1.5"
-            stroke="currentColor"
-            className="w-6 h-6"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M17.982 18.725A7.488 7.488 0 0012 15.75a7.488 7.488 0 00-5.982 2.975m11.963 0a9 9 0 10-11.963 0m11.963 0A8.966 8.966 0 0112 21a8.966 8.966 0 01-5.982-2.275M15 9.75a3 3 0 11-6 0 3 3 0 016 0z"
-            />
-          </svg>
-          Welcome {user && user.name}
-        </p>
-        {profile !== null ? (
-          <>
-            <div className="dash-buttons">
-              <Link to="/edit-profile" className="btn btn-light">
-                <i className="fas fa-user-circle text-primary" /> Edit Profile
-              </Link>
-              <Link to="/add-experience" className="btn btn-light">
-                <i className="fab fa-black-tie text-primary" /> Add Experience
-              </Link>
-              <Link to="/add-education" className="btn btn-light">
-                <i className="fas fa-graduation-cap text-primary" /> Add
-                Education
-              </Link>
-            </div>
-            {/* <Experience experience={profile.experience} />
+      {loading && profile === null ? (
+        <Loader />
+      ) : (
+        <section className="max-w-[1100px] m-auto overflow-hidden px-8 mt-24 mb-12">
+          <h1 className="text-4xl mb-4">Dashboard</h1>
+          <div className="text-3xl mb-4 flex justify-start gap-4">
+            <FaUserAlt />
+            <p>Welcome {user && user.name}</p>
+          </div>
+          {profile !== null ? (
+            <>
+              <div className="flex justify-start items-center gpa-4">
+                <Link to="/edit-profile" className="px-5">
+                  <Button
+                    className="flex justify-start items-center gap-1"
+                    type="dashed"
+                  >
+                    <FaEdit /> <span>Edit Profile</span>
+                  </Button>
+                </Link>
+                <Link to="/add-experience" className="px-5">
+                  <Button
+                    className="flex justify-start items-center gap-1"
+                    type="dashed"
+                  >
+                    <FaBlackTie /> <span>Add Experience</span>
+                  </Button>
+                </Link>
+                <Link to="/add-education" className="px-5">
+                  <Button
+                    className="flex justify-start items-center gap-1"
+                    type="dashed"
+                  >
+                    <FaGraduationCap /> <span>Add Education</span>
+                  </Button>
+                </Link>
+              </div>
+              {/* <Experience experience={profile.experience} />
           <Education education={profile.education} /> */}
 
-            <div className="my-2">
-              <button
-                className="btn btn-danger"
-                onClick={() => deleteAccount()}
-              >
-                <i className="fas fa-user-minus" /> Delete My Account
-              </button>
-            </div>
-          </>
-        ) : (
-          <>
-            <p>You have not yet setup a profile, please add some info</p>
-            <Link to="/create-profile" className="btn btn-primary my-1">
-              Create Profile
-            </Link>
-          </>
-        )}
-      </section>
+              <div className="my-4 px-5">
+                <Button
+                  danger
+                  className="px-5 flex justify-center items-center gap-2"
+                  onClick={() => deleteAccount()}
+                >
+                  <FaTrash /> <span>Delete My Account</span>
+                </Button>
+              </div>
+            </>
+          ) : (
+            <>
+              <p>You have not yet create a profile, please add some info</p>
+              <Link to="/create-profile" className="my-1 px-5">
+                <Button type="primary" className="bg-blue-500">
+                  {" "}
+                  Create Profile
+                </Button>
+              </Link>
+            </>
+          )}
+        </section>
+      )}
     </Layout>
   );
 };

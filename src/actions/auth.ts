@@ -2,6 +2,7 @@ import axiosInstance from "../utils/axiosInstace";
 import setAuthToken from "../utils/setAuthToken";
 import {
   AUTH_ERROR,
+  CLEAR_PROFILE,
   LOGIN_FAILED,
   LOGIN_SUCCESS,
   LOGOUT,
@@ -83,4 +84,7 @@ export const login =
     }
   };
 
-export const logout = () => ({ type: LOGOUT });
+export const logout = () => (dispatch: any) => {
+  dispatch({ type: LOGOUT });
+  dispatch({ type: CLEAR_PROFILE });
+};

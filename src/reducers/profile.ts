@@ -55,6 +55,7 @@ function profileReducer(
         ...state,
         profile: null,
         repos: [],
+        loading: false,
       };
     case GET_REPOS:
       return {
