@@ -12,6 +12,7 @@ import { loadUser } from "./actions/auth";
 import { useAppDispatch } from "./hooks/hooks";
 import Dashboard from "./components/dashboard/Dashboard";
 import PrivateRoute from "./routes/PrivateRoute";
+import CreateProfile from "./components/profileForm/CreateProfile";
 if (localStorage.token) {
   setAuthToken(localStorage.token);
 }
@@ -33,6 +34,14 @@ function App() {
           element={
             <PrivateRoute>
               <Dashboard deleteAccount={undefined} />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/create-profile"
+          element={
+            <PrivateRoute>
+              <CreateProfile />
             </PrivateRoute>
           }
         />
