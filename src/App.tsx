@@ -13,6 +13,7 @@ import { useAppDispatch } from "./hooks/hooks";
 import Dashboard from "./components/dashboard/Dashboard";
 import PrivateRoute from "./routes/PrivateRoute";
 import CreateProfile from "./components/profileForm/CreateProfile";
+import EditProfile from "./components/profileForm/EditProfile";
 if (localStorage.token) {
   setAuthToken(localStorage.token);
 }
@@ -42,6 +43,14 @@ const App: FC = (): ReactElement => {
           element={
             <PrivateRoute>
               <CreateProfile />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/edit-profile"
+          element={
+            <PrivateRoute>
+              <EditProfile />
             </PrivateRoute>
           }
         />

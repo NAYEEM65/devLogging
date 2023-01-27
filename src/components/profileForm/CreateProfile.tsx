@@ -1,14 +1,36 @@
-// import { connect } from "react-redux";
+import { connect } from "react-redux";
 import { Form, Input, Button, message, Select } from "antd";
 import { FC, ReactElement, useState } from "react";
 import Layout from "../../Layout/Layout";
-
-const CreateProfile: FC = (): ReactElement => {
+import { createProfile, getCurrentProfile } from "../../actions/profile";
+import { useNavigate } from "react-router-dom";
+interface ICreateProfile {
+  createProfile: Function;
+}
+const CreateProfile: FC<ICreateProfile> = ({ createProfile }): ReactElement => {
   const [form] = Form.useForm();
+  const navigate = useNavigate();
+
   const [status, setStatus] = useState<string>("");
 
-  const onFinish = (values: object) => {
+  const onFinish = (values: any) => {
     message.success("Submit success!");
+    const data: object = {
+      company: values.company,
+      website: values.website,
+      location: values.location,
+      status: status,
+      skills: values.skills,
+      githubusername: values.githubusername,
+      bio: values.bio,
+      twitter: values.twitter,
+      facebook: values.facebook,
+      linkedin: values.linkedin,
+      youtube: values.youtube,
+      instagram: values.instagram,
+    };
+    createProfile(data, navigate);
+
     console.log(values, status);
   };
 
@@ -110,5 +132,9 @@ const CreateProfile: FC = (): ReactElement => {
     </Layout>
   );
 };
-
-export default CreateProfile;
+const mapStateToProps = (state: any) => ({
+  profile: state.profile,
+});
+export default connect(mapStateToProps, { createProfile, getCurrentProfile })(
+  CreateProfile
+);
