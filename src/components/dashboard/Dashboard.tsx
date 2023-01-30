@@ -52,7 +52,7 @@ const Dashboard: FC<IDashboard> = (props): ReactElement => {
                     <FaEdit /> <span>Edit Profile</span>
                   </Button>
                 </Link>
-                <Link to="/add-experience" className="px-5">
+                <Link to="/experience" className="px-5">
                   <Button
                     className="flex justify-start items-center gap-1"
                     type="dashed"

@@ -100,21 +100,12 @@ export const createProfile =
       if (!edit) {
         navigate("/dashboard");
       }
-    } catch (err) {
-      // const errors = err.response.data.errors;
-      // if (errors) {
-      //   errors.forEach((error) => dispatch(setAlert(error.msg, 'danger')));
-      // }
-      // dispatch({
-      //   type: PROFILE_ERROR,
-      //   payload: { msg: err.response.statusText, status: err.response.status }
-      // });
-    }
+    } catch (err) {}
   };
 
 // Add Experience
 export const addExperience =
-  (formData: any) =>
+  (formData: object) =>
   async (dispatch: (arg0: { type: string; payload: any }) => void) => {
     try {
       const res = await axiosInstance.put("/profile/experience", formData);
@@ -126,9 +117,6 @@ export const addExperience =
 
       return res.data;
     } catch (err: any) {
-      const errors = err.response.data.errors;
-      console.log(errors);
-
       // dispatch({
       //   type: PROFILE_ERROR,
       //   payload: { msg: err.response.statusText, status: err.response.status }

@@ -14,6 +14,9 @@ import Dashboard from "./components/dashboard/Dashboard";
 import PrivateRoute from "./routes/PrivateRoute";
 import CreateProfile from "./components/profileForm/CreateProfile";
 import EditProfile from "./components/profileForm/EditProfile";
+import Experience from "./components/Experience/Experience";
+import Education from "./components/Education/Education";
+
 if (localStorage.token) {
   setAuthToken(localStorage.token);
 }
@@ -51,6 +54,22 @@ const App: FC = (): ReactElement => {
           element={
             <PrivateRoute>
               <EditProfile />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/experience"
+          element={
+            <PrivateRoute>
+              <Experience />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/add-education"
+          element={
+            <PrivateRoute>
+              <Education />
             </PrivateRoute>
           }
         />

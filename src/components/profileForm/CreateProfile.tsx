@@ -11,7 +11,7 @@ const CreateProfile: FC<ICreateProfile> = ({ createProfile }): ReactElement => {
   const [form] = Form.useForm();
   const navigate = useNavigate();
 
-  const [status, setStatus] = useState<string>("");
+  const [status, setStatus] = useState<string>("Developer");
 
   const onFinish = (values: any) => {
     message.success("Submit success!");
@@ -30,8 +30,6 @@ const CreateProfile: FC<ICreateProfile> = ({ createProfile }): ReactElement => {
       instagram: values.instagram,
     };
     createProfile(data, navigate);
-
-    console.log(values, status);
   };
 
   const onFinishFailed = () => {
@@ -66,7 +64,7 @@ const CreateProfile: FC<ICreateProfile> = ({ createProfile }): ReactElement => {
           <div className="w-full mb-4">
             <label className="mb-2">Status</label>
             <Select
-              defaultValue="Developer"
+              defaultValue={status}
               onChange={handleChange}
               className="w-full"
               options={[
