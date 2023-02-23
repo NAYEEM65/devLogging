@@ -37,7 +37,7 @@ const App: FC = (): ReactElement => {
           path="/dashboard"
           element={
             <PrivateRoute>
-              <Dashboard deleteAccount={undefined} />
+              <Dashboard deleteAccount={undefined} experience />
             </PrivateRoute>
           }
         />

@@ -12,12 +12,14 @@ import { getCurrentProfile } from "../../actions/profile";
 import { Link } from "react-router-dom";
 import Loader from "../../Loader/Loader";
 import { Button } from "antd";
+import Experience from "./Experience";
 
 interface IDashboard {
   getCurrentProfile: Function;
   deleteAccount: any;
   auth: { user: any };
   profile: { profile: any; loading: Boolean };
+  experience: Object;
 }
 
 const Dashboard: FC<IDashboard> = (props): ReactElement => {
@@ -69,8 +71,8 @@ const Dashboard: FC<IDashboard> = (props): ReactElement => {
                   </Button>
                 </Link>
               </div>
-              {/* <Experience experience={profile.experience} />
-          <Education education={profile.education} /> */}
+              <Experience experience={profile.experience} />
+              {/* <Education education={profile.education} /> */}
 
               <div className="my-4 px-5">
                 <Button

@@ -1,19 +1,25 @@
-import { Button, Form, Input, message } from "antd";
-import { FC, ReactElement } from "react";
+import { Button, Checkbox, DatePicker, Form, Input, message } from "antd";
+import { FC, ReactElement, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Layout from "../../Layout/Layout";
 import { connect } from "react-redux";
 import { addEducation } from "../../actions/profile";
+import { CheckboxChangeEvent } from "antd/es/checkbox";
 interface IEducation {
   addEducation: Function;
 }
 const Education: FC<IEducation> = ({ addEducation }): ReactElement => {
   const [form] = Form.useForm();
+  const [checked, setChecked] = useState<boolean>(false);
+
   const navigate = useNavigate();
+  const onChange = (e: CheckboxChangeEvent) => {
+    setChecked(!checked);
+  };
 
   const onFinish = (values: any) => {
     message.success("Submit success!");
-    addEducation(values);
+    addEducation({ ...values, current: checked });
   };
 
   const onFinishFailed = () => {
@@ -30,7 +36,7 @@ const Education: FC<IEducation> = ({ addEducation }): ReactElement => {
         autoComplete="off"
         className="mt-10 px-10"
       >
-        <div className="grid md:grid-cols-2 md:gap-5 gap-2 items-center w-full">
+        <div className="grid md:grid-cols-3 md:gap-5 gap-2 items-center w-full">
           <Form.Item
             name="school"
             label="School"
@@ -47,8 +53,6 @@ const Education: FC<IEducation> = ({ addEducation }): ReactElement => {
           >
             <Input placeholder="Degree" />
           </Form.Item>
-        </div>
-        <div className="grid md:grid-cols-2 md:gap-5 gap-2 items-center w-full mb-5">
           <Form.Item
             name="fieldofstudy"
             rules={[{ required: true }]}
@@ -56,33 +60,33 @@ const Education: FC<IEducation> = ({ addEducation }): ReactElement => {
           >
             <Input placeholder="Field of study" />
           </Form.Item>
-          <Form.Item
-            name="current"
-            label="Current"
-            rules={[{ required: true }]}
-            className="flex-1"
-          >
-            <Input placeholder="Current " />
-          </Form.Item>
         </div>
-        <div className="grid md:grid-cols-2 md:gap-5 gap-2 items-center w-full">
-          <Form.Item
-            name="from"
-            label="From"
-            rules={[{ required: true }]}
-            className="flex-1"
-          >
-            <Input placeholder="From" />
-          </Form.Item>
-          <Form.Item name="to" label="To" className="flex-1">
-            <Input placeholder="To" />
-          </Form.Item>
-        </div>
-        <div className="grid w-full">
+        <div className="grid md:grid-cols-2 md:gap-5 gap-2 items-center w-full mb-5">
+          <div className="grid md:grid-cols-3 md:gap-5 gap-2 items-center w-full flex-1">
+            <Form.Item name="current" label="Current" className="flex-1">
+              <Checkbox onChange={onChange} checked={checked}>
+                Checkbox
+              </Checkbox>
+            </Form.Item>
+
+            <Form.Item
+              name="from"
+              label="From"
+              rules={[{ required: true }]}
+              className="flex-1"
+            >
+              <DatePicker />
+            </Form.Item>
+            <Form.Item name="to" label="To" className="flex-1">
+              <DatePicker disabled={checked} />
+            </Form.Item>
+          </div>
+
           <Form.Item name="description" label="Description">
             <Input placeholder="description" />
           </Form.Item>
         </div>
+
         <Form.Item>
           <Button
             type="primary"
