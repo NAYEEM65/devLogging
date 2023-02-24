@@ -1,3 +1,4 @@
+import { Confirm, Notify } from "notiflix";
 import axiosInstance from "../utils/axiosInstace";
 import {
   GET_PROFILE,
@@ -116,7 +117,6 @@ export const addEducation =
         payload: res.data,
       });
 
-      // dispatch(setAlert('Education Added', 'success'));
       return res.data;
     } catch (err: any) {
       const errors = err.response.data.errors;
@@ -129,28 +129,56 @@ export const addEducation =
 export const deleteExperience =
   (id: any) =>
   async (dispatch: (arg0: { type: string; payload: any }) => void) => {
-    try {
-      const res = await axiosInstance.delete(`/profile/experience/${id}`);
+    Confirm.show(
+      "Please Confirm!",
+      "Do you agree Remove this field",
+      "Yes",
+      "No",
+      async () => {
+        const res = await axiosInstance.delete(`/profile/experience/${id}`);
 
-      dispatch({
-        type: UPDATE_PROFILE,
-        payload: res.data,
-      });
-    } catch (err) {}
+        dispatch({
+          type: UPDATE_PROFILE,
+          payload: res.data,
+        });
+      },
+      () => {},
+      {
+        width: "320px",
+        borderRadius: "8px",
+        titleColor: "#fb923c",
+        okButtonBackground: "#fb923c",
+        cssAnimationStyle: "zoom",
+      }
+    );
   };
 
 // Delete education
 export const deleteEducation =
   (id: any) =>
   async (dispatch: (arg0: { type: string; payload: any }) => void) => {
-    try {
-      const res = await axiosInstance.delete(`/profile/education/${id}`);
+    Confirm.show(
+      "Please Confirm!",
+      "Do you agree Remove this field",
+      "Yes",
+      "No",
+      async () => {
+        const res = await axiosInstance.delete(`/profile/education/${id}`);
 
-      dispatch({
-        type: UPDATE_PROFILE,
-        payload: res.data,
-      });
-    } catch (err) {}
+        dispatch({
+          type: UPDATE_PROFILE,
+          payload: res.data,
+        });
+      },
+      () => {},
+      {
+        width: "320px",
+        borderRadius: "8px",
+        titleColor: "#fb923c",
+        okButtonBackground: "#fb923c",
+        cssAnimationStyle: "zoom",
+      }
+    );
   };
 
 // Delete account & profile

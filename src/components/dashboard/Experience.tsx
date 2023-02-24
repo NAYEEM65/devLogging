@@ -1,39 +1,46 @@
 import { Button, Table } from "antd";
-import React, { FC, ReactElement } from "react";
 import Moment from "react-moment";
-const { Column, ColumnGroup } = Table;
+import { connect } from "react-redux";
+
+import { deleteExperience } from "../../actions/profile";
+const { Column } = Table;
 interface IExperience {
   experience: Array<any>;
+  deleteExperience: Function;
 }
-const Experience = ({ experience }: IExperience) => {
+const Experience = ({ experience, deleteExperience }: IExperience) => {
   return (
     <div>
       <h2 className="my-2">Experience</h2>
-      <Table dataSource={experience} pagination={false}>
+      <Table
+        dataSource={experience}
+        pagination={false}
+        className="overflow-x-auto"
+      >
         <Column
           title="Company"
           dataIndex="company"
           key="company"
-          responsive={["md"]}
+          responsive={["xs", "sm", "md"]}
         />
         <Column
           title="Title"
           dataIndex="title"
           key="title"
-          responsive={["md"]}
+          responsive={["xs", "sm", "md"]}
         />
         <Column
           title="From"
           dataIndex="from"
           key="from"
-          responsive={["md"]}
+          responsive={["xs", "sm", "md"]}
           render={(from) => <Moment format="YYYY/MM/DD">{from}</Moment>}
         />
         <Column
           title="To"
           dataIndex="to"
           key="to"
-          responsive={["md"]}
+          responsive={["xs", "sm", "md"]}
           render={(to) => (
             <span
               className={`${
@@ -48,14 +55,18 @@ const Experience = ({ experience }: IExperience) => {
         />
         <Column
           title="Action"
-          dataIndex="location"
+          dataIndex="_id"
           key="action"
-          responsive={["md"]}
-          render={(_: any) => <Button danger>Delete</Button>}
+          responsive={["xs", "sm", "md"]}
+          render={(_id: any) => (
+            <Button danger onClick={() => deleteExperience(_id)}>
+              Delete
+            </Button>
+          )}
         />
       </Table>
     </div>
   );
 };
 
-export default Experience;
+export default connect(null, { deleteExperience })(Experience);
